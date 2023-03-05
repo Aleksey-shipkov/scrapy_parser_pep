@@ -46,6 +46,7 @@ def test_run_scrapy(monkeypatch, temp_dir):
         'Убедитесь что в директории проекта создается директория `results` для '
         'вывода в файл результатов.'
     )
+    print(output_files)
     assert len(output_files) == 2, (
         'Убедитесь, что создано два csv-файла с результами парсинга'
     )
