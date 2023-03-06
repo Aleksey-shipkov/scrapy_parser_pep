@@ -1,9 +1,6 @@
 import csv
 from datetime import datetime
-from pep_parse.settings import BASE_DIR
-
-TIME_FORMAT = "%Y-%m-%dT%H-%M-%S"
-RESULT_DIR = "results"
+from pep_parse.settings import BASE_DIR, TIME_FORMAT, RESULT_DIR
 
 
 class PepParsePipeline:

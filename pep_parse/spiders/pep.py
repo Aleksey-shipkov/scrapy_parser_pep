@@ -1,12 +1,13 @@
 import re
 import scrapy
 from pep_parse.items import PepParseItem
+from pep_parse.settings import ALLOWED_DOMAINS, PEP_NAME_PATTERN
 
 
 class PepSpider(scrapy.Spider):
     name = "pep"
-    allowed_domains = ["peps.python.org"]
-    start_urls = ["https://peps.python.org/"]
+    allowed_domains = [ALLOWED_DOMAINS]
+    start_urls = [f"https://{ALLOWED_DOMAINS}/"]
 
     def parse(self, response):
         urls_list = response.css('section[id="numerical-index"] tr')
@@ -16,7 +17,7 @@ class PepSpider(scrapy.Spider):
                 yield response.follow(pep_url, callback=self.parse_pep)
 
     def parse_pep(self, response):
-        pattern = r"PEP (?P<pep_number>\d+) – (?P<pep_name>.*)"
+        pattern = PEP_NAME_PATTERN
         full_name = response.css("h1.page-title::text").get()
         pep_name_match = re.search(pattern, full_name)
         number, name = pep_name_match.groups()

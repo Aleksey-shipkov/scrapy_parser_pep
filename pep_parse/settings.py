@@ -2,13 +2,20 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parent.parent
+ALLOWED_DOMAINS = "peps.python.org"
+PEP_NAME_PATTERN = r"PEP (?P<pep_number>\d+) – (?P<pep_name>.*)"
+TIME_FORMAT = "%Y-%m-%dT%H-%M-%S"
+RESULT_DIR = "results"
+FILE_FORMAT = "csv"
+
+
 BOT_NAME = "pep_parse"
-SPIDER_MODULES = ["pep_parse.spiders"]
 NEWSPIDER_MODULE = "pep_parse.spiders"
+SPIDER_MODULES = ["pep_parse.spiders"]
 ROBOTSTXT_OBEY = False
 FEEDS = {
-    'results/pep_%(time)s.csv': {
-        "format": "csv",
+    "results/pep_%(time)s.csv": {
+        "format": FILE_FORMAT,
         "fields": ["number", "name", "status"],
         "overwrite": True,
     }
