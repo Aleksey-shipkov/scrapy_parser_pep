@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = "pep_parse.spiders"
 SPIDER_MODULES = ["pep_parse.spiders"]
 ROBOTSTXT_OBEY = False
 FEEDS = {
-    "results/pep_%(time)s.csv": {
+    f"results/pep_%(time)s.{FILE_FORMAT}": {
         "format": FILE_FORMAT,
         "fields": ["number", "name", "status"],
         "overwrite": True,

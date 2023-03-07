@@ -17,9 +17,8 @@ class PepSpider(scrapy.Spider):
                 yield response.follow(pep_url, callback=self.parse_pep)
 
     def parse_pep(self, response):
-        pattern = PEP_NAME_PATTERN
         full_name = response.css("h1.page-title::text").get()
-        pep_name_match = re.search(pattern, full_name)
+        pep_name_match = re.search(PEP_NAME_PATTERN, full_name)
         number, name = pep_name_match.groups()
         status = (
             response.css('dt:contains("Status:") + dd').css("abbr::text").get()
